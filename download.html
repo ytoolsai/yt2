@@ -16,20 +16,23 @@
     <p id="downloadLink"></p>
 
     <script>
-        async function downloadVideo() {
-            const videoUrl = document.getElementById("videoUrl").value;
-            if (!videoUrl) return alert("Please enter a YouTube URL");
+        const API_URL = "https://your-app.onrender.com"; // Replace with your Render URL
 
-            const response = await fetch(`http://localhost:3000/download?url=${encodeURIComponent(videoUrl)}`);
-            const data = await response.json();
+async function downloadVideo() {
+    const videoUrl = document.getElementById("videoUrl").value;
+    if (!videoUrl) return alert("Please enter a YouTube URL");
 
-            if (data.videoUrl) {
-                document.getElementById("downloadLink").innerHTML = 
-                    `<a href="${data.videoUrl}" target="_blank">Download Video</a>`;
-            } else {
-                alert("Failed to fetch video link");
-            }
-        }
+    const response = await fetch(`${API_URL}/download?url=${encodeURIComponent(videoUrl)}`);
+    const data = await response.json();
+
+    if (data.videoUrl) {
+        document.getElementById("downloadLink").innerHTML = 
+            `<a href="${data.videoUrl}" target="_blank">Download Video</a>`;
+    } else {
+        alert("Failed to fetch video link");
+    }
+}
+
     </script>
 </body>
 </html>
